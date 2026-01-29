@@ -1,0 +1,21 @@
+{
+  "name": "Calendario y Tablero",
+  "short_name": "Calendario",
+  "description": "Una aplicación para gestionar calendarios y tareas",
+  "start_url": "home.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#64b3a8",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
