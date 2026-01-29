@@ -26,8 +26,8 @@ let activeTaskIndex = null;
 const urlParams = new URLSearchParams(window.location.search);
 const activeCalendarId = urlParams.get('id');
 
+// Si no se encuentra un ID, redirigir al inicio
 if (!activeCalendarId) {
-  alert("No se encontró el calendario activo");
   window.location.href = "home.html"; // Redirige a home si no hay ID
 } 
 
@@ -35,10 +35,10 @@ if (!activeCalendarId) {
 let data = JSON.parse(localStorage.getItem("calendarios")) || { calendarios: [] };
 let calendarData = data.calendarios.find(c => c.id === activeCalendarId);
 
+// Verificar si se encontró el calendario, si no, redirigir al inicio
 if (!calendarData) {
-  alert("No se encontró el calendario con ID: " + activeCalendarId);
-  window.location.href = "home.html"; // Si no se encuentra el calendario, redirigir a home
-}
+  window.location.href = "home.html"; // Redirigir a home si no se encuentra el calendario
+} 
 
 let tasks = calendarData.tasks;
 
