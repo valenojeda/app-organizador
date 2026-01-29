@@ -69,10 +69,10 @@ function deleteCalendar(calendarios, index) {
 
 document.addEventListener('DOMContentLoaded', loadCalendars);
 
-// Registro del Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker
+      .register('/sw.js')
       .then((registration) => {
         console.log('Service Worker registrado con éxito:', registration);
       })
@@ -81,3 +81,33 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
+
+
+// Instalar la app como PWA
+let deferredPrompt;
+const installBtnContainer = document.getElementById('installBtnContainer');
+const installBtn = document.getElementById('installBtn');
+
+// Mostrar el botón de instalación cuando el evento "beforeinstallprompt" sea emitido
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  // Guardar el evento de instalación para usarlo más tarde
+  deferredPrompt = e;
+  // Mostrar el botón de instalación
+  installBtnContainer.style.display = 'block';
+});
+
+// Manejar el clic en el botón de instalación
+installBtn.addEventListener('click', () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt(); // Muestra el cuadro de diálogo para instalar la PWA
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('El usuario ha instalado la app');
+      } else {
+        console.log('El usuario no ha instalado la app');
+      }
+      deferredPrompt = null; // Limpiar el evento de instalación
+    });
+  }
+});
